@@ -8,8 +8,8 @@
         <version>2.7.15</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.cca-bank</groupId>
-    <artifactId>reporting-service</artifactId>
+    <groupId>com.bkr</groupId>
+    <artifactId>bomyr-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>reporting-service</name>
     <description>Reporting service for document generation</description>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>FINANCIAL ANALYSIS REPORT</title>
+    <link th:href="@{classpath:static/css/financial-report.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div></div>
+    <table style="margin-top: 250px; width: 100%">
+        <tr>
+            <td style="padding-top: 40px">
+                <h1 class="text-center" th:text="${form.companyName}">[COMPANY NAME]</h1>
+                <h2 class="text-center" th:text="${form.year}">YEAR</h2>
+                <h2 class="text-center">Financial Analysis Report</h2>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center; width: 100%; padding-top: 40px">
+                <img th:src="@{classpath:static/images/logo.jpg}" alt=""/>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top: 40px">
+                <p class="text-center">Prepared by:</p>
+                <p class="text-center">Bomyr Kamguia Research &#x26; Analytics</p>
+                <p class="text-center">1472, Blvd de la République – Akwa</p>
+                <p class="text-center">P.O Box 3462 Douala, Cameroun</p>
+                <p class="text-center">+237 694-921-255 / 677-067-620</p>
+            </td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <p class="text-justify">
+        We at Bomyr Kamguia Research &#x26; Analytics have compiled the enclosed report for <i th:text="${form.companyName}">[Company Name]</i> based on financial data compiled through <i>[Date]</i>.
+    </p>
+    <p class="text-justify">
+        Each report has been customized for your business / your needs to give you the information you need to compare your / the annual business performance to comparable businesses within the <i>[Industry Names]</i> industry (Industry Code). This information can help you to determine if your / the business strategy is competitive within your / its industry and to pinpoint your / the company's strengths and weaknesses. It will also enable you to benchmark your / the firm’s performance over time, allowing you to chart the progress of your / the business, to analyse your / the business performance more effectively, and to make more informed decisions about your company's direction / relationship with the business.
+    </p>
+    <p class="text-justify">
+        Please review each report carefully as it is important that you fully understand the data presented here. Please be aware that the analysis presented is based on historical figures. It is not a prediction of the future but rather a tool for monitoring the progress of your/the business over time. This information should factor into your decision making, but it should certainly not be the only factor in your business decisions. Be sure to consult all appropriate resources and professionals before making any decisions that may affect the financial health of your company.
+    </p>
+    <p class="text-justify">
+        If you have any questions, please contact our office at <i>[e-mail address and telephone number]</i> at your earliest convenience. It is a privilege to provide you with services and tools to help you manage your business successfully.
+    </p>
+    <p class="text-justify">
+        Your commitment to Bomyr Kamguia Research &#x26; Analytics is greatly appreciated!
+    </p>
+
+    <p><b>Agenda</b></p>
+    <p>What happened ?</p>
+    <p>Financial Statement</p>
+    <ul>
+        <li><span class="list-item-decorator">★</span>Balance sheet</li>
+        <li><span class="list-item-decorator">★</span>Income statement</li>
+        <li><span class="list-item-decorator">★</span>Cash flow</li>
+    </ul>
+    <p>Keys Ratio</p>
+    <p>What will happen ?</p>
+    <p>Assumptions</p>
+    <p>Forecasting Financial Statement</p>
+    <ul>
+        <li><span class="list-item-decorator">★</span>Balance sheet</li>
+        <li><span class="list-item-decorator">★</span>Income Statement</li>
+        <li><span class="list-item-decorator">★</span>Cash flow</li>
+        <li><span class="list-item-decorator">★</span>Use of cash flow</li>
+    </ul>
+    <p>Key ratios</p>
+    <p>Conclusion</p>
+
+    <div class="page-break"></div>
+
+    <h3>I- What Happened</h3>
+
+    <div class="page-break"></div>
+
+    <h3>II- Financial Statements</h3>
+    <ul>
+        <li><span class="list-item-decorator">★</span>Historical Income statements and Balance Sheet <i>[we just show the balance sheet and income statement received at the input; we provide a compact one in English. All calculus made to get this form of statement will be provided. It will be in XAF currency]</i></li>
+    </ul>
+
+    <ul>
+        <li><span class="list-item-decorator">★</span>Cash Flow <i>[we just show cash flow as at the input.]</i></li>
+    </ul>
+
+    <ul>
+        <li><span class="list-item-decorator">★</span><b>Ratio</b></li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h3>III- Financial Health</h3>
+    <p>Here we will describe the financial health and issue that may face the company based on financial statement.</p>
+    <h3>IV- What will happen?</h3>
+
+    <ul>
+        <li><span class="list-item-decorator">★</span><b>Common size statements</b> <i>[It represent the proportion value of each item of the financial statement in regard with sales year per year]</i></li>
+    </ul>
+
+    <ul>
+        <li><span class="list-item-decorator">★</span><b>Assumptions</b> <i>[Assumptions for forecasting model based on inputs given by the user, he/she just have to enter the value for assumptions but we have to construct a sentence as below]</i></li>
+    </ul>
+
+    <p class="text-justify">Value in [] are ones enter by the user and text in () are the one we have to adapt in the sentence because it can change in opposite</p>
+
+    <h3>V- Forecasting Financial Statement <span style="font-weight: normal; font-style: italic; font-size: 12px">[Assumptions for forecasting model based on inputs given by the user, he/she just have to enter the value for assumptions but we have to construct a sentence as below]</span></h3>
+    <p class="text-justify">We will give the possibility to the consumer to choose variable (element) to use for plug in, these variables are STD, LTD and CMD with combination of any of it and a specification about the possibility to go below 0. So, we will present the first forecasting table with Discretionary Funding Need not equal to 0 and next others table depending on the choice you made about plug in variables.</p>
+
+    <ul>
+        <li><span class="list-item-decorator">★</span>Financial Statement</li>
+    </ul>
+
+    <p class="text-justify"><b>Model :</b> Model characteristics: Both short-term debt (STD) and long-term debt (LTD) are held constant. No plug is used to balance the balance sheet, so it is likely to be unbalanced (FDN)</p>
+
+    <p class="text-justify"><b>Forecasting :</b> Model Characteristics: Total capitalization is used as plug and target capital structure is maintained. C&#x26;MS balance is calculated as percentage of sale. Dividend payout can go up to 40%, but dividend per share cannot grow more than 10% in any year. Dividend per share cannot grow more than 10% LT repaid carries an interest rate of 9% per year. Set up the minimum of C&#x26;MS to 2.1 of sales. STD + LTD + EQ is the plug, Set up the minimum of C&#x26;MS to 2.1% of sales, we will do all adjustment in retained earnings bcz we don't have enough information to decide whether it is in paid in or in retained earnings.</p>
+</body>
+</html>
