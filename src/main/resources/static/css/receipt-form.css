@@ -1,0 +1,48 @@
+@font-face {
+    font-family: Inter;
+    src: url("../fonts/inter/Inter-Light.ttf");
+    font-weight: normal;
+    -fs-pdf-font-embed: embed;
+    -fs-pdf-font-encoding: Identity-H;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url("../fonts/inter/Inter-SemiBold.ttf");
+    font-weight: bold;
+    -fs-pdf-font-embed: embed;
+    -fs-pdf-font-encoding: Identity-H;
+}
+
+body {
+    font-family: Inter, serif;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.bordered {
+    border: 1px solid gray;
+}
+
+.bordered-bottom {
+    border-bottom: 1px solid gray;
+}
+
+table.center td,
+table.center th {
+    text-align: center;
+}
+
+td, th {
+    padding: 8px;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+}
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+}

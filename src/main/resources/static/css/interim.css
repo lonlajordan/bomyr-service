@@ -1,0 +1,50 @@
+@page {
+    margin: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50% auto;
+    background-image: url("../images/watermark1.png");
+}
+
+@font-face {
+    font-family: Inter;
+    src: url("../fonts/inter/Inter-Light.ttf");
+    font-weight: normal;
+    -fs-pdf-font-embed: embed;
+    -fs-pdf-font-encoding: Identity-H;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url("../fonts/inter/Inter-SemiBold.ttf");
+    font-weight: bold;
+    -fs-pdf-font-embed: embed;
+    -fs-pdf-font-encoding: Identity-H;
+}
+
+body {
+    font-family: Inter, serif;
+    font-size: 13px;
+    height: 100%;
+    margin: 40px 40px 0 40px;
+}
+
+footer {
+    font-family: Inter, serif;
+}
+
+td, th {
+    vertical-align: center;
+}
+
+table.account-info td,
+table.account-info th {
+    text-align: center;
+    border: 1px solid black;
+}
+
+
+.bg-violet {
+    background-color: #7634b4;
+    color: white;
+}

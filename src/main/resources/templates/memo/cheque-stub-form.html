@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>REMISE DE CHEQUES</title>
+    <link th:href="@{classpath:static/css/cheque-stub-form.css}" rel="stylesheet"/>
+</head>
+<body>
+    <table style="width: 100%">
+        <tbody>
+            <tr>
+                <td style="text-align: left; vertical-align: top;">
+                    <img style="height: 100px;vertical-align: top" th:src="@{classpath:static/images/logo.png}" alt="" /> <br/>
+                </td>
+                <td style="vertical-align: top; width: 50%; padding-left: 20px">
+                    <span style="font-size: 20px"><b>REMISE DE CHÈQUES</b></span><br/>
+                    <span style="font-weight: bold">Date de la remise : <span th:text="${#temporals.format(form.printDate, 'dd/MM/yyyy')}"></span></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-size: 16px"><b>Titulaire du compte</b></span><br/>
+                    <span th:text="${form.accountOwner}"></span><br/>
+                    <span th:text="${form.accountName}"></span><br/>
+                    <span th:unless="${#strings.isEmpty(form.customerAddress)}" style="font-style: italic" th:text="${form.customerAddress}"></span>
+                    <span th:if="${#strings.isEmpty(form.customerAddress)}" style="color: red"><i>Attention, adresse du client non renseignée !</i></span>
+                </td>
+                <td style="text-align: center">
+                    <table style="width: 100%">
+                        <tr>
+                            <th colspan="4" style="border-bottom: 2px solid black">Identifiant national de compte bancaire</th>
+                        </tr>
+                        <tr>
+                            <th>Banque</th>
+                            <th>Agence</th>
+                            <th>Compte</th>
+                            <th>Clé</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${form.bank}"></td>
+                            <td th:text="${form.agency}"></td>
+                            <td th:text="${form.accountNumber}"></td>
+                            <td th:text="${form.accountKey}"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="width: 100%; margin-top: 20px; padding: 10px; border-collapse: collapse">
+        <thead>
+            <tr>
+                <td colspan="4" style="text-align: left">
+                    Nombre de chèques : <span th:text="${#lists.size(form.cheques)}"></span>
+                </td>
+            </tr>
+            <tr>
+                <th class="bordered text-center">Émetteur</th>
+                <th class="bordered text-center" style="width: 20%">Banque</th>
+                <th class="bordered text-center" style="width: 20%">Numéro de chèque</th>
+                <th class="bordered text-center" style="width: 20%">Montant (XAF)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cheque, iter : ${form.cheques}">
+                <td class="bordered text-center" th:utext="${cheque.emitter}"></td>
+                <td class="bordered text-center" th:utext="${cheque.bank}"></td>
+                <td class="bordered text-center" th:utext="${cheque.number}"></td>
+                <td class="bordered text-center" th:text="${#numbers.formatInteger(cheque.amount, 1, 'WHITESPACE')}"></td>
+            </tr>
+        </tbody>
+        <tr style="height: 10px;"><td colspan="4"></td></tr>
+        <tfoot>
+            <tr>
+                <td class="bordered text-center" colspan="3" style="text-align: right; font-style: italic; padding-right: 15px">Total</td>
+                <td class="bordered text-center" th:text="${#numbers.formatInteger(form.total, 1, 'WHITESPACE')}"></td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

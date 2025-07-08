@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>DEMANDE DE CONGÉ ANNUEL</title>
+    <link th:href="@{classpath:static/css/vacation-form.css}" rel="stylesheet"/>
+</head>
+<body>
+<table style="width: 100%;margin-bottom: 5px">
+    <tr>
+        <td style="width: 40%;">
+            <img style="height: 60px" th:src="@{classpath:static/images/logo.png}" alt="" />
+        </td>
+        <th style="text-align: center; width: 60%; border: 5px solid #7634b4; font-size: 20px; font-weight: bold; border-radius: 10px 0">
+            DEMANDE DE CONGÉ ANNUEL
+        </th>
+    </tr>
+</table>
+<p style="float: right"><span th:text="${form.place}"></span>, le <span th:text="${#temporals.format(form.date, 'dd/MM/yyyy')}"></span></p>
+<p style="margin-top: 100px"><b>Matricule : </b> <span th:text="${form.matricule}"></span></p>
+<p><b>Noms et Prénoms : </b> <span th:text="${form.name}"></span></p>
+<p><b>Unité : </b> <span th:text="${form.unity}"></span></p>
+<p><b>Fonction/Poste : </b> <span th:text="${form.function}"></span></p>
+<p><b>Date du dernier congé annuel : </b> <span th:text="${#temporals.format(form.lastVacationDate, 'dd/MM/yyyy')}"></span></p>
+<p><b>Période sollicitée : </b> <i style="margin-right: 20px">du</i> <span th:text="${#temporals.format(form.startDate, 'dd/MM/yyyy')}"></span> <i style="margin: 0 20px">au</i> <span th:text="${#temporals.format(form.endDate, 'dd/MM/yyyy')}"></span></p>
+<p><span class="light-violet"><i>Signature de l'employé(e)</i></span></p>
+<p>
+    <img class="signature" th:src="${form.signature}" />
+</p>
+<th:block th:if="${form.interim != null}">
+    <p><span class="light-violet"><i>Proposition d'intérim</i></span></p>
+    <p><b>Nom et Prénoms :</b> <span th:text="${form.interim.name}"></span></p>
+    <p><b>Fonction :</b> <span th:text="${form.interim.function}"></span></p>
+    <p><b>Unité :</b> <span th:text="${form.interim.unity}"></span></p>
+</th:block>
+
+<table class="signatory-info" style="width: 100%;margin-top: 10px;border-collapse: collapse">
+    <tr>
+        <th style="width: 50%; text-align: center">Avis et visa supérieur hiérarchique N+1</th>
+        <th style="text-align: center">Avis et visa supérieur hiérarchique N+2</th>
+    </tr>
+    <tr style="height: 100px">
+        <td style="border-bottom: none">
+            <img class="signature" th:src="${form.supervisor?.signature}" />
+        </td>
+        <td style="border-bottom: none">
+            <img class="signature" th:src="${form.supervisorNext?.signature}" />
+        </td>
+    </tr>
+    <tr>
+        <td style="border-top: none" th:text="${form.supervisor?.name}"></td>
+        <td style="border-top: none" th:text="${form.supervisorNext?.name}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>EXTRAIT DE COMPTE</title>
+    <link th:href="@{classpath:static/css/account-history-form.css}" rel="stylesheet"/>
+</head>
+<body>
+    <table style="width: 100%; border: 1px solid grey; border-radius: 5px; padding: 10px;">
+        <tr>
+            <td rowspan="2" style="text-align: left; width: 45%">
+                <img style="height: 100px;" th:src="@{classpath:static/images/logo.png}" alt="" />
+            </td>
+            <td style="text-align: center">
+                <h2>EXTRAIT DE COMPTE</h2>
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align: center">Nombre de jours d'historique : <span th:text="${form.numberOfDays}"></span></th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 20%">Code client :</td>
+                        <td th:text="${form.clientCode}"></td>
+                    </tr>
+                    <tr>
+                        <td>Nom du client :</td>
+                        <td th:text="${form.clientName}"></td>
+                    </tr>
+                    <tr>
+                        <td>Numéro de compte :</td>
+                        <td th:text="${form.accountNumber}"></td>
+                    </tr>
+                    <tr>
+                        <td>Libellé du compte :</td>
+                        <td th:text="${form.accountName}"></td>
+                    </tr>
+                    <tr>
+                        <td>Iban :</td>
+                        <td th:text="${form.iban}"></td>
+                    </tr>
+                    <tr>
+                        <td>Date :</td>
+                        <td th:text="${#temporals.format(form.date, 'dd/MM/yyyy')}"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%; border: 1px solid grey; border-radius: 5px; margin-top: 20px; padding: 10px">
+        <thead>
+            <tr>
+                <td colspan="6" style="text-align: right">
+                    <i>Solde initial (XAF) : <span th:text="${#numbers.formatInteger(form.balance, 1, 'WHITESPACE')}"></span></i>
+                    <br/>
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+                <th style="width: 15%">Date</th>
+                <th style="width: 15%">Date de valeur</th>
+                <th>Opération</th>
+                <th style="width: 15%">Débit (XAF)</th>
+                <th style="width: 15%">Crédit (XAF)</th>
+                <th style="width: 15%">Solde (XAF)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="transaction" th:each="transaction, iter : ${form.transactions}">
+                <td th:text="${#temporals.format(transaction.date, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#temporals.format(transaction.valueDate, 'dd/MM/yyyy')}"></td>
+                <td th:utext="${transaction.operation}"></td>
+                <td th:text="${#numbers.formatInteger(transaction.debit, 1, 'WHITESPACE')}"></td>
+                <td th:text="${#numbers.formatInteger(transaction.credit, 1, 'WHITESPACE')}"></td>
+                <td th:text="${#numbers.formatInteger(transaction.balance, 1, 'WHITESPACE')}"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="transaction">
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td th:text="${#numbers.formatInteger(form.totalDebit, 1, 'WHITESPACE')}"></td>
+                <td th:text="${#numbers.formatInteger(form.totalCredit, 1, 'WHITESPACE')}"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="6" style="text-align: right">
+                    <br/>
+                    <br/>
+                    Imprimé le <span th:text="${#temporals.format(form.printDate, 'dd/MM/yyyy')}"></span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>DEMANDE D'AUTORISATION D'ABSENCE</title>
+    <link th:href="@{classpath:static/css/absence-form.css}" rel="stylesheet"/>
+</head>
+<body>
+<table style="width: 100%;margin-bottom: 5px">
+    <tr>
+        <td style="width: 40%;">
+            <img style="height: 60px" th:src="@{classpath:static/images/logo.png}" alt="" />
+        </td>
+        <th style="text-align: center; width: 60%; border: 5px solid #7634b4; font-size: 20px; font-weight: bold; border-radius: 10px 0">
+            DEMANDE D'AUTORISATION D'ABSENCE
+        </th>
+    </tr>
+</table>
+<p style="float: right"><span th:text="${form.place}"></span>, le <span th:text="${#temporals.format(form.date, 'dd/MM/yyyy')}"></span></p>
+<p style="margin-top: 30px"><b>Matricule : </b> <span th:text="${form.matricule}"></span></p>
+<p><b>Noms et Prénoms : </b> <span th:text="${form.name}"></span></p>
+<p><b>Unité : </b> <span th:text="${form.unity}"></span></p>
+<p><b>Fonction/Poste : </b> <span th:text="${form.function}"></span></p>
+<p><b>Motif de l'absence et pièces(s) justificative(s) : </b> <span th:text="${form.reason}"></span></p>
+<p><b>Date de départ : </b> <span th:text="${#temporals.format(form.startDate, 'dd/MM/yyyy')}"></span> <b style="margin-left: 40px">Date de reprise de service : </b> <span th:text="${#temporals.format(form.endDate, 'dd/MM/yyyy')}"></span></p>
+<p><b>Durée de l'absence : </b> <span th:text="${form.days}"></span> <b th:text="${form.days > 1 ? 'Jours' : 'Jour'}">Jours</b></p>
+<table style="width: 100%">
+    <tr>
+        <td style="text-align: right"><i>A déduire du salaire</i></td>
+        <td style="text-align: left">
+            <input type="checkbox" th:checked="${form.deduction?.ordinal == 0}" readonly="true" />
+        </td>
+        <td style="text-align: right"><i>A déduire du Congé</i></td>
+        <td style="text-align: left">
+            <input type="checkbox" th:checked="${form.deduction?.ordinal == 1}" readonly="true" />
+        </td>
+    </tr>
+</table>
+<p><b>Proposition d'intérim : </b> <span th:text="${form.interim}"></span></p>
+<table style="width: 100%">
+    <tr>
+        <td rowspan="3" style="width: 70%"></td>
+        <td style="width: 30%; text-align: center"><i>Date et signature,</i></td>
+    </tr>
+    <tr>
+        <td style="text-align: center" th:text="${#temporals.format(form.date, 'dd/MM/yyyy')}"></td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><img class="signature" th:src="${form.signature}" /></td>
+    </tr>
+</table>
+<table class="signatory-info" style="width: 100%; margin-top: 10px; border-collapse: collapse">
+    <tr>
+        <th style="width: 33%" class="light-violet">Avis et visa ( <i>Signataire 1</i> )</th>
+        <th style="width: 33%" class="light-violet">Avis et visa ( <i>Signataire 2</i> )</th>
+        <th class="light-violet">Avis et visa ( <i>DCH</i> )</th>
+    </tr>
+    <tr>
+        <td style="border-bottom: none" th:text="${form.signatory1?.name}"></td>
+        <td style="border-bottom: none" th:text="${form.signatory2?.name}"></td>
+        <td style="border-bottom: none" th:text="${form.headOffice?.name}"></td>
+    </tr>
+    <tr style="height: 70px">
+        <td style="border-bottom: none; border-top: none">
+            <img class="signature" th:src="${form.signatory1?.signature}" />
+        </td>
+        <td style="border-bottom: none; border-top: none">
+            <img class="signature" th:src="${form.signatory2?.signature}" />
+        </td>
+        <td style="border-bottom: none; border-top: none">
+            <img class="signature" th:src="${form.headOffice?.signature}" />
+        </td>
+    </tr>
+    <tr>
+        <td style="border-top: none" th:text="${#temporals.format(form.signatory1?.date, 'dd/MM/yyyy')}"></td>
+        <td style="border-top: none" th:text="${#temporals.format(form.signatory2?.date, 'dd/MM/yyyy')}"></td>
+        <td style="border-top: none" th:text="${#temporals.format(form.headOffice?.date, 'dd/MM/yyyy')}"></td>
+    </tr>
+</table>
+
+<table class="signatory-info" style="width: 100%; margin-top: 10px; border-collapse: collapse">
+    <tr>
+        <th colspan="7" class="light-violet">Avis de l'Unité du Capital Humain</th>
+    </tr>
+    <tr>
+        <th rowspan="2" style="width: 12%">Nature de l'absence</th>
+        <th rowspan="2">Cumul <br/> annuel des <br/> absences</th>
+        <th rowspan="2">Stock <br/> des Congés <br/> année N</th>
+        <th rowspan="2">Avis d'octroi</th>
+        <th rowspan="2">Droit restant dû</th>
+        <th colspan="2">Imputation</th>
+    </tr>
+    <tr>
+        <th style="width: 15%">Salaire</th>
+        <th style="width: 15%">Congé Annuel</th>
+    </tr>
+    <th:block th:if="${form.deduction?.ordinal == 0}">
+        <tr>
+            <td>Payée</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Non payée</td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.absence)}"></td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.stock)}"></td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.advice)}"></td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.rights)}"></td>
+            <td>X</td>
+            <td></td>
+        </tr>
+    </th:block>
+    <th:block th:if="${form.deduction?.ordinal == 1}">
+        <tr>
+            <td>Payée</td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.absence)}"></td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.stock)}"></td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.advice)}"></td>
+            <td th:text="${T(com.cca.reporting.util.DigitUtils).toCurrency(form.rights)}"></td>
+            <td></td>
+            <td>X</td>
+        </tr>
+        <tr>
+            <td>Non payée</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </th:block>
+    <th:block th:if="${form.deduction?.ordinal == 2}">
+        <tr>
+            <td>Payée</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Non payée</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </th:block>
+    <tr style="height: 70px">
+        <td style="vertical-align: top; border-right: none"><span><i>Signatures : </i></span></td>
+        <td style="border-left: none" colspan="6">
+            <table>
+                <tr>
+                    <td style="border: none; padding: 10px; text-align: center" th:each="signatory : ${form.signatories}">
+                        <img class="signature" th:src="${signatory.signature}" /> <br/><br/>
+                        <span style="font-size: 10px" th:text="${signatory.name}"></span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
